@@ -1,8 +1,6 @@
 import os
 import csv
 
-#budgetdata_pybank.csv
-
 months = []
 profit_loss = []
 difference = []
@@ -14,6 +12,7 @@ max_new = []
 min_new = []
 
 csvpath = os.path.join('budget_data.csv')
+filename = os.path.join(csvpath, 'python-challenge/py_bank')
 
 with open(csvpath, newline="") as csvfile:
 

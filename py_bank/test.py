@@ -1,7 +1,11 @@
 import os
 import csv
 
-#budgetdata_pybank.csv
+# file name = budget_data.csv
+# relative path = 'python-challenge/py_bank'
+
+#dirname = os.path.dirname(__file__)
+#filename = os.path.join(dirname, 'relative/path/to/file/you/want')
 
 months = []
 profit_loss = []
