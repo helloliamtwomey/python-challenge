@@ -11,8 +11,7 @@ difference_new = []
 max_new = []
 min_new = []
 
-csvpath = os.path.join('budget_data.csv')
-filename = os.path.join(csvpath, 'python-challenge/py_bank')
+csvpath = os.path.join('..','resources','budget_data.csv')
 
 with open(csvpath, newline="") as csvfile:
 
@@ -57,7 +56,15 @@ with open(csvpath1, newline="") as csvfile:
 print("Financial Analysis")
 print("--------------------------------------------------")
 print("Total Months: " + str(len(months_new)))
-print("Sum of Profit/Loss: $" + str(sum(profit_loss_new)))
-print("Average Change: $" + str(round(sum(difference_new)/((len(difference_new))-1))))
+print("Total: $" + str(sum(profit_loss_new)))
+print("Average Change: $", round((sum(difference_new)/((len(difference_new))-1)), 2))
 print("Greatest Increase in Profits: " + str(months_new[difference_new.index(max(difference_new))]) + " ($" + str(difference_new[difference_new.index(max(difference_new))]) + ")")
-print("Greatest Increase in Profits: " + str(months_new[difference_new.index(min(difference_new))]) + " ($" + str(difference_new[difference_new.index(min(difference_new))]) + ")")
+print("Greatest Decrease in Profits: " + str(months_new[difference_new.index(min(difference_new))]) + " ($" + str(difference_new[difference_new.index(min(difference_new))]) + ")")
+
+'''Financial Analysis
+--------------------------------------------------
+Total Months: 86
+Total: $22564198
+Average Change: $ -8311.11
+Greatest Increase in Profits: Aug-16 ($1862002)
+Greatest Decrease in Profits: Feb-14 ($-1825558)'''
