@@ -1,59 +1,62 @@
 import os
 import csv
 
-ballot_ID = []
-county = []
-candidate = []
-new_candidate = []
+# path to the election data
+election_csv = os.path.join('Resources', 'election_data.csv')
 
-csvpath = os.path.join('..','resources','election_data.csv')
+# create dictionaries and lists to store the data
+election_data = []
+data_dict = {}
+output_results = {}
 
-with open(csvpath, newline="") as csvfile:
+# calculate the number of votes received by each candidate.
+def calc_percentage(election_data):
+    for row in election_data:
+        candidate = row[2]
+        if candidate in data_dict:
+            data_dict[candidate] += 1
+        else:
+            data_dict[candidate] = 1
 
+# calculate the winner of the election based on popular vote.
+def winner(data_dict):
+    return max(data_dict, key=data_dict.get)
+
+# create a list of strings containing the election results
+def results_func(data_dict, output_results, winner):
+    results = []
+    total_votes = sum(data_dict.values())
+    results.append("Election Results")
+    results.append("-------------------------")
+    results.append(f"Total Votes: {total_votes}")
+    results.append("-------------------------")
+    for candidate, votes in data_dict.items():
+        percentage = round(votes / total_votes * 100, 3)
+        output_results[candidate] = f"{percentage:.3f}% ({votes})"
+        results.append(f"{candidate}: {output_results[candidate]}")
+    results.append("-------------------------")
+    results.append(f"Winner: {winner}")
+    results.append("-------------------------")
+    return results
+
+# read the CSV file and store the data in the election_data list
+with open(election_csv, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
-
-    csvheader = next(csvreader)
-
+    csv_header = next(csvreader)
     for row in csvreader:
-        candidate.append(row[2])
+        election_data.append(row)
 
-unique_candidate = set(candidate) 
-new_candidate = list(unique_candidate)
+# calculate the election results
+calc_percentage(election_data)
+win = winner(data_dict)
+results = results_func(data_dict, output_results, win)
 
-count0 = 0
-count1 = 0
-count2 = 0
-count3 = 0
+# print the results
+for result in results:
+    print(result)
 
-for i in range(len(candidate)):
-    if (candidate[i] == new_candidate[0]):
-        count0 = count0 + 1
-    elif (candidate[i] == new_candidate[1]):
-        count1 = count1 + 1
-    elif (candidate[i] == new_candidate[2]):
-        count2 = count2 + 1
-    elif (candidate[i] == new_candidate[3]):
-        count3 = count3 + 1
-percent0 = float((count0/len(candidate)*100))
-percent1 = float((count1/len(candidate)*100))
-percent2 = float((count2/len(candidate)*100))
-percent3 = float((count3/len(candidate)*100))
-
-#IndexError: list index out of range
-finalresults0 = [new_candidate[0], new_candidate[1], new_candidate[2], new_candidate[3]]
-finalresults1 = [percent0, percent1, percent2, percent3]
-finalresults2 = [count0, count1, count2, count3]
-
-print("Election Results")
-print("------------------------------------")
-print("Total Votes: " + str(len(candidate)))
-print("------------------------------------")
-
-print(str(new_candidate[0]) + " " + str(round(percent0,3)) +"% (" + str(count0) + ")") 
-print(str(new_candidate[1]) + " " + str(round(percent1,3)) +"% (" + str(count1) + ")")
-print(str(new_candidate[2]) + " " + str(round(percent2,3)) +"% (" + str(count2) + ")")
-print(str(new_candidate[3]) + " " + str(round(percent3,3)) +"% (" + str(count3) + ")") 
-print("------------------------------------")
-print("Winner is " + str(finalresults0[finalresults2.index(max(finalresults2))]))
-print("------------------------------------")
-print("")
+# export the results to a text file
+with open("analysis/election_results.txt", "w") as file:
+    # iterate through the results list and write each result to the file, separated by newlines
+    for result in results:
+        file.write(result + "\n")
