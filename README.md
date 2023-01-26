@@ -109,11 +109,12 @@ with open("analysis/bank_results.txt", "w") as file:
     # iterate through the results list and write each result to the file, separated by newlines
     for result in results:
         file.write(result + "\n")
-        
+       
 ```
 
 #### PyBank Results
 
+```
 Financial Analysis
 ----------------------------
 Total Months: 86
@@ -121,6 +122,7 @@ Total: $22564198.0
 Average Change: $-8311.11
 Greatest Increase in Profits: Aug-16 ($1862002)
 Greatest Decrease in Profits: Feb-14 ($-1825558)
+```
 
 #### PyPoll Python Script 
 
@@ -192,6 +194,7 @@ with open("analysis/election_results.txt", "w") as file:
 ```
 #### PyPoll Results
 
+```
 Election Results
 -------------------------
 Total Votes: 369711
@@ -202,3 +205,4 @@ Raymon Anthony Doane: 3.139% (11606)
 -------------------------
 Winner: Diana DeGette
 -------------------------
+```
