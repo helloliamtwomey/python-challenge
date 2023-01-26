@@ -2,7 +2,7 @@
 
 ## Background
 
-This project is designed to analyze financial and poll data using Python programming language. The project includes two tasks: PyBank and PyPoll.
+This project is designed to analyze financial and poll data using Python programming language. The project includes two tasks:
 
 PyBank - The project uses Python to read the CSV file, extract the data, and perform calculations to determine the total number of months included in the dataset, the net total amount of "Profit/Losses" over the entire period, the changes in "Profit/Losses" over the entire period and the average of those changes, the greatest increase in profits (date and amount) over the entire period, and the greatest decrease in profits (date and amount) over the entire period. The results are then displayed in the console and written to a text file.
 
